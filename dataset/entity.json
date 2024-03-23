@@ -1,5 +1,5 @@
 {
-	"name": "Metric",
+	"name": "entity",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
@@ -9,22 +9,18 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "MetricID",
+				"name": "EntityID",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "MetricName",
-				"type": "varchar"
-			},
-			{
-				"name": "Unit",
+				"name": "EntityName",
 				"type": "varchar"
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "Metric"
+			"table": "Entity"
 		}
 	}
 }
