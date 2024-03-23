@@ -1,0 +1,9 @@
+{
+	"name": "sample-datafactory-telmen87",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "9c234700-8bb2-4d00-939d-3883665e5b4a",
+		"tenantId": "3cf34f61-7a65-423a-9c12-f5c4e033a73d"
+	}
+}
