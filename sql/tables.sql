@@ -34,7 +34,3 @@ CREATE TABLE FactTable (
   CONSTRAINT FK_FactTable_MetricID FOREIGN KEY (MetricID) REFERENCES Metric(MetricID),
   CONSTRAINT FK_FactTable_EntityID FOREIGN KEY (EntityID) REFERENCES Entity(EntityID)
 );
-
-
-
-drop table DimDate;
