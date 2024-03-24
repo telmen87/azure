@@ -1,11 +1,8 @@
-create PROCEDURE sp_PopulateDimDate (@EndDate DATE)
+create PROCEDURE sp_PopulateDimDate 
+    (@EndDate DATE,
+    @StartDate date)
 AS
 BEGIN
-  DECLARE @StartDate DATE;
-
-  -- Set StartDate to beginning of the year for @EndDate
-  SET @StartDate = '2019-01-01';
-
   -- Generate rows from @StartDate to @EndDate
   WITH DateCTE (Date) AS (
     SELECT @StartDate
@@ -15,9 +12,8 @@ BEGIN
     WHERE Date < @EndDate
   )
   INSERT INTO DimDate (
-      DateKey,
       Date,
-      FullDate,
+      DateVal,
       Year,
       Month,
       Day,
@@ -26,20 +22,27 @@ BEGIN
       WeekOfYear,
       IsWeekend
   )
-  SELECT 
-    ROW_NUMBER() OVER (ORDER BY Date), -- Generate unique sequential DateKey
-    Date,
-    CONVERT(CHAR(10), Date, 120), -- Format date as YYYY-MM-DD
-    YEAR(Date), 
-    MONTH(Date), 
-    DAY(Date),
-    DATENAME(dw, Date),  -- Get DayOfWeek name
-    DAY(Date),
-    DATEPART(week, Date),  -- Get WeekOfYear
-    CASE WHEN DATENAME(dw, Date) IN ('Saturday', 'Sunday') THEN 1 ELSE 0 END AS IsWeekend
-  FROM DateCTE
+  select 
+      Date,
+      DateVal,
+      Year, 
+      Month, 
+      Day, 
+      DayOfWeek,
+      sum(IsWeekend) over(partition by year, month order by year, month, day) as DayOfMonth,
+      WeekOfYear,
+      IsWeekend
+  from 
+      (SELECT 
+        day(date) || '/'  || month(date) || '/' || year(date) as Date,
+        CONVERT(CHAR(10), Date, 120) as DateVal, -- Format date as YYYY-MM-DD
+        YEAR(Date) as Year,  
+        MONTH(Date) as Month, 
+        DAY(Date) as Day,
+        DATENAME(dw, Date) as DayOfWeek,  -- Get DayOfWeek name
+        DATEPART(week, Date) as WeekOfyear,  -- Get WeekOfYear
+        CASE WHEN DATENAME(dw, Date) IN ('Saturday', 'Sunday') THEN 0 ELSE 1 END AS IsWeekend
+      FROM DateCTE) table1
   option (maxrecursion 0);
 END
 GO
-
---drop PROCEDURE sp_PopulateDimDate
