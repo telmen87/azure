@@ -1,0 +1,47 @@
+{
+	"name": "factortable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "FactKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DateKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MetricID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EntityID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TimePeriod",
+				"type": "varchar"
+			},
+			{
+				"name": "Value",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "FactTable"
+		}
+	}
+}

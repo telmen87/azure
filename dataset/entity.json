@@ -1,5 +1,5 @@
 {
-	"name": "DestinationDataset_yb5",
+	"name": "entity",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
@@ -7,10 +7,20 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "EntityID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EntityName",
+				"type": "varchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "AzureBlobStorageFile"
+			"table": "Entity"
 		}
 	}
 }

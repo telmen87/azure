@@ -10,9 +10,13 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "SampleDataset.csv",
+				"folderPath": "ot",
 				"container": "sample"
 			},
 			"columnDelimiter": ",",
+			"compressionCodec": "bzip2",
+			"compressionLevel": "Optimal",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""

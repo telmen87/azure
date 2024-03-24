@@ -1,0 +1,30 @@
+{
+	"name": "Metric",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "MetricID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MetricName",
+				"type": "varchar"
+			},
+			{
+				"name": "Unit",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Metric"
+		}
+	}
+}
